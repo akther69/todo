@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block main_block %}
+<div class="container">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <h1 class="text-center my-2">Pending Task  <i class="fa-regular fa-hourglass-half"></i></h1>
+        {%if tasks%}
+        {%for t in tasks%}
+        <div class="card">
+        <h5 class="card-header">TASK</h5>
+        <div class="card-body">
+        <h5 class="card-title">{{t.title}}</h5>
+        <p class="card-text"><th>{% if t.status %}
+            Completed
+            {% else %}
+            Not Completed
+            {% endif %}</th></p>
+        <p class="card-text"><th>{{t.created_date}}</th></p>
+        <a href="{%url 'todo-edit' t.id%}" class="btn btn-warning" style="margin-right: 10px;"><i class="fa-solid fa-pen-to-square"></i></a>
+        <a href="{%url 'todo-delete' t.id%}" class="btn btn-danger" style="margin-right: 10px;"><i class="fa-solid fa-trash"></i></a>
+        <a href="{%url 'todo-completed-update' t.id%}" class="btn btn-success"><i class="fa-solid fa-check"></i></a>
+    </div>
+  </div>
+  <br>
+  {%endfor%}
+        {%else%}
+        <h6 class="d-flex justify-content-center align-items-center" style="height: 70vh;">No Pending Task</h6>
+        {%endif%}
+</div>
+        <div class="col-3"></div>
+</div>
+{% endblock  %}
